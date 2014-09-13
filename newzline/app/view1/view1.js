@@ -9,7 +9,71 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', [function() {
+.controller('View1Ctrl', ['$scope', function (
+    $scope,
+    articleList) 
+{
+
+    var articleSearchKey = "4cb004734653f50693955b17bbde27ff:6:69801032";
+
+    var beginDate = "20120101";
+    var endDate = "20120101";
+    var articleSearchKey = "4cb004734653f50693955b17bbde27ff:6:69801032";
+    var urlCall = "http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=romney&begin_date=" + beginDate + "&end_date=" + endDate + "&fl=web_url,snippet&api-key=" + articleSearchKey;
+
+
+    $scope.articleList = [];
+
+    function _init() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: urlCall,
+            success: function(data) {
+              alert(data.response.docs.length);
+              alert(JSON.stringify(data));
+              alert(data.response.docs[1].web_url);
+              alert(data.response.docs[1].snippet);
+
+              var items = data.response.docs.length;
+
+              var i = 0;
+              for (i = 0; i < items; i++) {
+                var item = {web_url: data.response.docs[i].web_url, snippet: data.response.docs[i].snippet};
+                console.log(JSON.stringify(item));
+                $scope.articleList.push(item);
+              }
+            }
+          });
+    }
+
+    _init();
+
+    // $(document).ready(function() {
+    //   console.log("ready!");
+    //   $.ajax({
+    //     type: "GET",
+    //     dataType: "json",
+    //     url: urlCall,
+    //     success: function(data) {
+    //       alert(data.response.docs.length);
+    //       alert(JSON.stringify(data));
+    //       alert(data.response.docs[1].web_url);
+    //       alert(data.response.docs[1].snippet);
+
+    //       var items = data.response.docs.length;
+
+    //       var i = 0;
+    //       for (i = 0; i < items; i++) {
+    //         var item = {web_url: data.response.docs[i].web_url, snippet: data.response.docs[i].snippet};
+    //         console.log(JSON.stringify(item));
+    //         articleList.push(item);
+    //       }
+    //     }
+    //   });
+    // });
+
+
     // var id_ = 'boxes-example';
     // var boxes_ = document.querySelectorAll('#' + id_ + ' .news-story-holder');
     // var dragSrcEl_ = null;
