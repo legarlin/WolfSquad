@@ -1,21 +1,25 @@
 <div ng-controller="View1Ctrl">
 <div id = "top-bar">NEWZLINE</div>
+
 <div id = "boxes-example">
-<div class = "news-story-holder">
-  <div class = "topic">TOPIC 1</div>
 
-  {{articleList.length}}
+	<!-- <div ng:repeat="o in obj"> -->
 
-  <ul>
-  	<li ng-repeat="item in articleList">{{item.web_url}}</li>
-  </ul>
+	<div class = "news-story-holder" ng-repeat="topic in topics">
+		<div class = "topic">{{topic.topic}} <a href ng-click="goCats = !goCats" class="data_button"><i class="fa fa-line-chart"></i></a></div>
+		<div class = "timeline">
+	        <div class = "news-story" ng-repeat="article in articles" style = "background-image:url('http://metrouk2.files.wordpress.com/2014/03/s12.jpg?w=1024&h=704');"><div class = "title">{{article.headline.main}}</div></div><!-- 
+	        <div class = "news-story" style = "background-image:url('http://metrouk2.files.wordpress.com/2014/03/s12.jpg?w=1024&h=704');"><div class = "title">Record iPhone 6 Pre-Orders etc etc etc</div></div>
+	       <div class = "news-story" style = "background-image:url('http://metrouk2.files.wordpress.com/2014/03/s12.jpg?w=1024&h=704');"><div class = "title">Record iPhone 6 Pre-Orders etc etc etc</div></div>
+	         <div class = "news-story" style = "background-image:url('http://metrouk2.files.wordpress.com/2014/03/s12.jpg?w=1024&h=704');"><div class = "title">Record iPhone 6 Pre-Orders etc etc etc</div></div>
+	        <div class = "news-story" style = "background-image:url('http://metrouk2.files.wordpress.com/2014/03/s12.jpg?w=1024&h=704');"><div class = "title">Record iPhone 6 Pre-Orders etc etc etc</div></div> -->
+		</div>
+	</div>
 
-  <div class = "timeline"></div>
-</div>
+	<div class="timeline" ng-show="goCats">
+		<div id="chode"+ {{o.id}} style="width:100%; height:400px;"></div>
+	</div>
 
-<div class = "news-story-holder">
-  <div class = "topic">TOPIC 2</div>
-  <div class = "timeline"></div>
-</div>
+
 </div>
 </div>
